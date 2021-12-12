@@ -3,7 +3,7 @@
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
     const missionTarget =document.getElementById("missionTarget");
             missionTarget.innerHTML=`
-              <div>
+              <div id="missionTarget" data-testid="missionTarget">
                 <h2>Mission Destination</h2>
                 <ol>
                     <li>Name: ${name} </li>
