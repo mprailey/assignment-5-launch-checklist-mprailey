@@ -1,43 +1,69 @@
+//const extMod = require('isomorphic-fetch');
 // Write your helper functions here!
-require('isomorphic-fetch');
-
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
-   // Here is the HTML formatting for our mission target div.
-   /*
+    const missionTarget =document.getElementById("missionTarget");
+            missionTarget.innerHTML=`
+              <div>
                 <h2>Mission Destination</h2>
                 <ol>
-                    <li>Name: </li>
-                    <li>Diameter: </li>
+                    <li>Name: ${name} </li>
+                    <li>Diameter: ${diameter}</li>
                     <li>Star: ${star}</li>
-                    <li>Distance from Earth: </li>
-                    <li>Number of Moons: </li>
+                    <li>Distance from Earth: ${distance}</li>
+                    <li>Number of Moons: ${moons} </li>
                 </ol>
-                <img src="">
-   */
-}
+                <img src=${imageUrl}></img>
+            </div>
+         `;   
+ }
 
 function validateInput(testInput) {
-   
-}
+ 
+    // Test if string is  empty, Return "Empty" , if true.
+    if(testInput === ""){
+        return "Empty";
+    //Test if testInput is a number.  Return a string indicating result
+    } else if(isNaN(testInput)){
+        return "Not a Number";
+        }else {
+             return "Is a Number";
+         }
+  }
 
-function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-   
-}
+function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
+ //Validate all values were entered and Fuel level and cargo mass are numbers
+     if (validateInput(pilot.value) === "Empty") {
+        alert("All fields are required!");
+        }else if (validateInput(copilot.value) === "Empty"){
+            alert("All fields are required!");
+            }else if (validateInput(fuelLevel.value) === "Empty") {	
+                alert("All fields are required!");
+                    }else if(validateInput(fuelLevel.value) === "Not a Number"){
+                        alert("Fuel level must be numeric");
+                        }else if (validateInput(cargoMass.value) === "Empty") {
+                            alert("All fields are required!");
+                            }else if(validateInput(cargoMass.value) === "Not a Number" ){
+                                alert("CargoMass must be numeric");
+                                 }
+           
+    }
 
 async function myFetch() {
-    let planetsReturned;
+    let planetsReturned=[];
 
-    planetsReturned = await fetch().then( function(response) {
+    planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json", {
         });
-
-    return planetsReturned;
+    return planetsReturned.json();       
 }
 
 function pickPlanet(planets) {
+    const numPlanets=5;
+    let randomNum=(Math.floor(Math.random() * numPlanets ));
+    return randomNum;
 }
 
-module.exports.addDestinationInfo = addDestinationInfo;
-module.exports.validateInput = validateInput;
-module.exports.formSubmission = formSubmission;
-module.exports.pickPlanet = pickPlanet; 
-module.exports.myFetch = myFetch;
+//exports.addDestinationInfo = addDestinationInfo;
+//exports.validateInput = validateInput;
+//exports.formSubmission = formSubmission;
+//exports.pickPlanet = pickPlanet; 
+//exports.myFetch = myFetch;
