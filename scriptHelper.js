@@ -32,22 +32,32 @@ function validateInput(testInput) {
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
  //Validate all values were entered and Fuel level and cargo mass are numbers
-     if (validateInput(pilot.value) === "Empty") {
-        alert("All fields are required!");
-        }else if (validateInput(copilot.value) === "Empty"){
-            alert("All fields are required!");
-            }else if (validateInput(fuelLevel.value) === "Empty") {	
-                alert("All fields are required!");
-                    }else if(validateInput(fuelLevel.value) === "Not a Number"){
-                        alert("Fuel level must be numeric");
-                        }else if (validateInput(cargoMass.value) === "Empty") {
-                            alert("All fields are required!");
-                            }else if(validateInput(cargoMass.value) === "Not a Number" ){
-                                alert("CargoMass must be numeric");
-                                 }
-           
-    }
 
+       if (validateInput(pilot.value) === "Empty" || validateInput(copilot.value)==="Empty"|| validateInput(fuelLevel.value)==="Empty" || validateInput(cargoMass.value) === "Empty"){
+            alert("All fields are required!")
+            }else if(validateInput(fuelLevel.value) === "Not a Number" || validateInput(cargoMass.value) === "Not a Number" ){
+                alert("Fuel level and Cargo Mass must be numeric");
+                }else {
+                    document.getElementById('pilotStatus').innerHTML="Pilot " + pilot.value + " is Ready "; /* update pilot ready  message */
+                    document.getElementById('copilotStatus').innerHTML="Co-Pilot " + copilot.value + " is Ready"; /* update copilot ready  message */
+                 //If fuelLevel is less than 10000 or cargoMass is greater than 10000
+                      if (Number(fuelLevel.value) < 10000 || Number(cargoMass.value) > 10000){ 
+                        if (Number(fuelLevel.value) < 10000 ){
+                           document.getElementById('fuelStatus').innerHTML="Fuel level is too low for launch";   
+                        }
+                        if (Number(cargoMass.value) > 10000 ){
+                            document.getElementById('cargoStatus').innerHTML="Cargo Mass is too large for launch";   
+                        }	
+                        document.getElementById('faultyItems').style.visibility = 'visible';
+                        document.getElementById('launchStatus').style.color='red';
+                        document.getElementById('launchStatus').innerHTML="Shuttle Not Ready for Launch"
+                    } else if(Number(fuelLevel.value) > 10000 && Number(cargoMass.value) < 10000) {
+                        document.getElementById('launchStatus').style.color='green';
+                        document.getElementById('launchStatus').innerHTML="Shuttle Ready for Launch";
+                        document.getElementById('faultyItems').style.visibility = 'hidden';
+                       }
+                }
+}
 async function myFetch() {
     let planetsReturned=[];
 

@@ -12,34 +12,13 @@ window.addEventListener("load", function() {
     console.log("Cargo Mass ", cargoMass.value);
     const faultyList=document.querySelector("input[name=faultyList");
     let button = document.getElementById("formSubmit");
-   //Button listener 
+   //Button listener
     button.addEventListener("click", function(event) {
-        event.preventDefault();
-        formSubmission(document,faultyList,pilotName,copilotName,fuelLevel,cargoMass);
-       document.getElementById('pilotStatus').innerHTML="Pilot " + pilotName.value + " is Ready "; /* update pilot ready  message */
-       document.getElementById('copilotStatus').innerHTML="Co-Pilot " + copilotName.value + " is Ready"; /* update copilot ready  message */
-     //If fuelLevel is less than 10000 or cargoMass is greater than 10000
-     if (Number(fuelLevel.value) < 10000 || Number(cargoMass.value) > 10000){ 
-      
-       if (Number(fuelLevel.value) < 10000 ){
-            document.getElementById('fuelStatus').innerHTML="Fuel level is too low for launch";   
-        }
-        if (Number(cargoMass.value) > 10000 ){
-            document.getElementById('cargoStatus').innerHTML="Cargo Mass is too large for launch";   
-        }	
-        document.getElementById('faultyItems').style.visibility = 'visible';
-        document.getElementById('launchStatus').style.color='red';
-        document.getElementById('launchStatus').innerHTML="Shuttle Not Ready for Launch"
+      event.preventDefault();
+      formSubmission(document,faultyList,pilotName,copilotName,fuelLevel,cargoMass);
+   });
+    
 
-     }  else{
-        document.getElementById('launchStatus').style.color='green';
-        document.getElementById('launchStatus').innerHTML="Shuttle Ready for Launch"
-
-
-     }
-
-    });
-   
    let listedPlanets;
    // Set listedPlanetsResponse equal to the value returned by calling myFetch()
    let listedPlanetsResponse=myFetch();
