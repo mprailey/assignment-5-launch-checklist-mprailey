@@ -16,11 +16,12 @@ window.addEventListener("load", function() {
     button.addEventListener("click", function(event) {
         event.preventDefault();
         formSubmission(document,faultyList,pilotName,copilotName,fuelLevel,cargoMass);
-     //If fuelLevel is less than 10000 or cargoMass is greater than 10000
-     if (Number(fuelLevel.value) < 10000 || Number(cargoMass.value) > 10000){
        document.getElementById('pilotStatus').innerHTML="Pilot " + pilotName.value + " is Ready "; /* update pilot ready  message */
        document.getElementById('copilotStatus').innerHTML="Co-Pilot " + copilotName.value + " is Ready"; /* update copilot ready  message */
-        if (Number(fuelLevel.value) < 10000 ){
+     //If fuelLevel is less than 10000 or cargoMass is greater than 10000
+     if (Number(fuelLevel.value) < 10000 || Number(cargoMass.value) > 10000){ 
+      
+       if (Number(fuelLevel.value) < 10000 ){
             document.getElementById('fuelStatus').innerHTML="Fuel level is too low for launch";   
         }
         if (Number(cargoMass.value) > 10000 ){
@@ -30,7 +31,13 @@ window.addEventListener("load", function() {
         document.getElementById('launchStatus').style.color='red';
         document.getElementById('launchStatus').innerHTML="Shuttle Not Ready for Launch"
 
-     }     
+     }  else{
+        document.getElementById('launchStatus').style.color='green';
+        document.getElementById('launchStatus').innerHTML="Shuttle Ready for Launch"
+
+
+     }
+
     });
    
    let listedPlanets;
